@@ -26,6 +26,7 @@ app.use(bodyParser.urlencoded({
 
 mongoose.connect("mongodb://localhost:27017/PlayerData",{useNewUrlParser:true});
 const userSchema=new mongoose.Schema({
+  username :String,
   email:String,
   password:String
 });
@@ -65,11 +66,13 @@ app.get("/index_regi",function(req,res){
 app.post("/index_regi",function(req,res){
   const username=req.body.username;
   const password=req.body.password;
+  const yo =req.body.variable;
   async function fun1(){
       try{
           await User.create({
             email : username,
-            password : password
+            password : password,
+            username:yo
           });
           res.redirect("login_1");
       }
@@ -90,7 +93,8 @@ app.post("/login_1",function(req,res){
           const data = await User.findOne({email:username});
           if(data.password === password){
 
-              res.redirect("index");
+              
+              await res.render("index",{variable: data.username});
           }
       }
       catch(err){
