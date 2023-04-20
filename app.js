@@ -3,6 +3,12 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require('mongoose');
 const path = require('path')
+
+const session =require("express-session");
+const passport=require("passport");
+const passportLocalMongoose=require("passport-local-mongoose");
+const encrypt = require("mongoose-encryption");
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -18,12 +24,33 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+mongoose.connect("mongodb://localhost:27017/PlayerData",{useNewUrlParser:true});
+const userSchema=new mongoose.Schema({
+  email: {
+    type :String,
+    required : true,
+    unique : true
+  },
+  password:String
+});
+
+// const secret= "yoyohoneysingh"
+// userSchema.plugin(encrypt,{secret: secret, encryptedFields : ["password"]});
+
+
+const User = new mongoose.model("User",userSchema);
+
 
 
 
 app.get("/",function(req,res){
+  res.render("login_1");
+});
+
+app.get("/index",function(req,res){
   res.render("index");
 });
+
 app.get("/indexH",function(req,res){
   res.render("indexH");
 });
@@ -38,6 +65,45 @@ app.get("/regi",function(req,res){
 app.get("/index_regi",function(req,res){
   res.render("index_regi");
 });
+
+app.post("/index_regi",function(req,res){
+  const username=req.body.email;
+  const password=req.body.password;
+  async function fun1(){
+      try{
+          await User.create({
+            email : username,
+            password : password
+          });
+          res.redirect("index");
+      }
+      catch(err){
+          console.log(err.message);
+      }
+  }
+  fun1();
+});
+
+
+app.post("/login_1",function(req,res){
+  const username=req.body.email;
+  const password=req.body.password;
+
+  async function fun2(){
+      try{
+          const data = await User.findOne({email:username});
+          if(data.password === password){
+
+              res.render("index");
+          }
+      }
+      catch(err){
+          console.log(err.message);
+      }
+  }
+  fun2();
+});
+
 
 ////////////////////////////// get fot games////////////////////////////
 
@@ -78,6 +144,9 @@ app.get("/target_tetris",function(req,res){
 
 app.get("/target_snake1",function(req,res){
   res.render("target_snake1");
+});
+app.get("/target_pacman",function(req,res){
+  res.render("target_pacman");
 });
 app.get("/target_tower",function(req,res){
   res.render("target_tower");

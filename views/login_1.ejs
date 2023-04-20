@@ -109,23 +109,18 @@ body
   
 <section id="nav-bar">
 	<nav class="navbar navbar-expand-lg navbar-light ">
-  <a class="navbar-brand" href="indexH"><img src="https://media.giphy.com/media/8kERJ466SJRKpaUf5S/giphy.gif" alt="logo" id="logo" ></a>
+  <a class="navbar-brand" href=""><img src="https://media.giphy.com/media/8kERJ466SJRKpaUf5S/giphy.gif" alt="logo" id="logo" ></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item ">
-        <a class="nav-link" href="indexH"><b><pre><font color="white">Home	</pre></font></b></a>
-      </li>
+  
       <li class="nav-item">
         <a class="nav-link" href="login_1"><b><pre><font color="white">Login 	</font></pre></b></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="regi"><b><pre><font color="white">SignUp 	</font></pre></b></a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="#ABout Us"><b><pre><font color="white">About Us</font></pre></b></a>
       </li>
      
     </ul>
@@ -161,13 +156,16 @@ body
         </defs>
         <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
       </svg>
-      <div class="form">
-        <label for="email">Email</label>
-        <input type="email" id="email">
-        <label for="password">Password</label>
-        <input type="password" id="password">
-        <input type="submit" id="submit" value="Submit">
-      </div>
+      <form method="post" target="/login_1">
+        <div class="form">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email">
+          <label for="password" >Password</label>
+          <input type="password" id="password" name="password">
+          <input type="submit" id="submit" value="Submit">
+        </div>
+
+      </form>
     </div>
   </div>
 </div>
