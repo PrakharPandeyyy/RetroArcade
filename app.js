@@ -26,11 +26,7 @@ app.use(bodyParser.urlencoded({
 
 mongoose.connect("mongodb://localhost:27017/PlayerData",{useNewUrlParser:true});
 const userSchema=new mongoose.Schema({
-  email: {
-    type :String,
-    required : true,
-    unique : true
-  },
+  email:String,
   password:String
 });
 
@@ -67,7 +63,7 @@ app.get("/index_regi",function(req,res){
 });
 
 app.post("/index_regi",function(req,res){
-  const username=req.body.email;
+  const username=req.body.username;
   const password=req.body.password;
   async function fun1(){
       try{
@@ -75,7 +71,7 @@ app.post("/index_regi",function(req,res){
             email : username,
             password : password
           });
-          res.redirect("index");
+          res.redirect("login_1");
       }
       catch(err){
           console.log(err.message);
@@ -94,7 +90,7 @@ app.post("/login_1",function(req,res){
           const data = await User.findOne({email:username});
           if(data.password === password){
 
-              res.render("index");
+              res.redirect("index");
           }
       }
       catch(err){
@@ -143,7 +139,7 @@ app.get("/target_tetris",function(req,res){
 });
 
 app.get("/target_snake1",function(req,res){
-  res.render("target_snake1");
+  res.render("target_snake");
 });
 app.get("/target_pacman",function(req,res){
   res.render("target_pacman");
