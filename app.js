@@ -2,12 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require('mongoose');
-const path = require('path')
-
-const session =require("express-session");
-const passport=require("passport");
-const passportLocalMongoose=require("passport-local-mongoose");
-const encrypt = require("mongoose-encryption");
+const path = require('path');
 
 const app = express();
 
